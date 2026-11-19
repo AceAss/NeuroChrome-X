@@ -1,0 +1,38 @@
+symbol	aliases	category	tier	source	curated_on	status	notes
+Creb1	CREB	tf	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Crebbp	Cbp	coactivator	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Ep300	p300	coactivator	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Mef2a		tf	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Mef2c		tf	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Camk2a	CaMKIIalpha	kinase	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Camk4	CaMKIV	kinase	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Grin1	NR1	nmdar	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Grin2a	NR2A	nmdar	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Grin2b	NR2B	nmdar	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Gria1	GluA1|GluR1	ampar	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Gria2	GluA2|GluR2	ampar	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Dlg4	Psd95|PSD-95	scaffold	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Shank1		scaffold	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Shank2		scaffold	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Shank3		scaffold	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Syngap1	SynGAP	regulator	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Nrxn1	Neurexin1	adhesion	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Nlgn1	Neuroligin1	adhesion	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Ntrk2	TrkB	receptor	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	BDNF receptor
+Ppp3ca	CnA|Calcineurin A	phosphatase	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Syn1	Synapsin I	presynaptic	1	canonical synaptic-plasticity or memory gene; curator list (PRD Appendix D seed)	2026-11-05	curated_v1	
+Camk2b	CaMKIIbeta	kinase	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Mapk1	Erk2	kinase	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Mapk3	Erk1	kinase	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Gria3	GluA3|GluR3	ampar	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Mef2d		tf	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Nrgn	Neurogranin	signaling	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Camk2n1	CaMKIIN	regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Dnmt1		epigenetic_regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	relevant to the DNMT-target question (OD3)
+Dnmt3a		epigenetic_regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	relevant to the DNMT-target question (OD3)
+Tet1		epigenetic_regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Tet2		epigenetic_regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Tet3		epigenetic_regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Mecp2		epigenetic_regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Hdac2		epigenetic_regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	
+Hdac3		epigenetic_regulator	2	plausible plasticity or epigenetic-regulator gene; curator list, verify	2026-11-05	candidate_v1	

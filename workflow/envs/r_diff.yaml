@@ -1,0 +1,17 @@
+name: ncx-r-diff
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - r-base
+  - bioconductor-deseq2
+  - bioconductor-csaw
+  - bioconductor-apeglm
+  - bioconductor-dss
+  - bioconductor-edger
+  - bioconductor-genomicranges
+  - bioconductor-rtracklayer
+  - r-optparse
+  - r-data.table
+  - r-arrow

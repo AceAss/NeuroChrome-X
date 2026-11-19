@@ -1,0 +1,34 @@
+"""NeuroChrom-X workflow entry point (PRD sections 7 to 10, ADR-010).
+
+Run from the repository root:
+
+    snakemake -s workflow/Snakefile --cores 4 --software-deployment-method conda \
+        --configfile config/config.yaml config/overrides/toy.yaml
+
+Later --configfile files override earlier ones key by key. With no --configfile the
+defaults in config/config.yaml are used.
+"""
+
+wildcard_constraints:
+    study=r"[a-z][a-z0-9_]*",
+    sample=r"[A-Za-z0-9_\-]+",
+    condition=r"[A-Za-z0-9_\-]+",
+    contrast=r"[A-Za-z0-9_\-]+",
+    assay="atac|chip|rna",
+
+
+include: "rules/common.smk"
+include: "rules/fetch.smk"
+include: "rules/qc_trim.smk"
+include: "rules/atac_chip.smk"
+include: "rules/tracks.smk"
+include: "rules/diff.smk"
+include: "rules/annotate.smk"
+include: "rules/report.smk"
+include: "rules/rna.smk"
+include: "rules/methyl.smk"
+
+
+rule all:
+    input:
+        all_targets(),

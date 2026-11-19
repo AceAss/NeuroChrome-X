@@ -1,0 +1,254 @@
+# NeuroChrom-X main configuration (CL-002)
+#
+# Source of truth: docs/PRD.md section 7 (defaults) and docs/adr/. Every value is a
+# starting point to review per dataset, not a fixed rule. Override per study with
+#   snakemake --configfile config/config.yaml config/overrides/<study>.yaml
+# (later files win). Never put secrets here: API keys come from environment
+# variables (see AGENTS.md).
+
+schema_version: "0.1"            # PRD section 9; bump on any data-contract change
+
+project:
+  name: neurochrom-x
+  seed: 20261105                 # fixed seed for every stochastic step (ADR-014)
+
+paths:
+  samples: config/samples.tsv
+  dataset_registry: config/dataset_registry.tsv
+  gene_sets: config/gene_sets
+  resources_manifest: config/resources.yaml   # written by TC-006
+  data: data                     # downloaded inputs (git-ignored)
+  resources: resources           # reference files (git-ignored)
+  results: results               # outputs (git-ignored)
+  logs: results/logs
+  tmp: results/tmp
+
+# ---------------------------------------------------------------------------
+# Reference (ADR-006). File names are placeholders that TC-006 confirms or
+# adjusts; it must report any change.
+# ---------------------------------------------------------------------------
+reference:
+  organism: mus_musculus
+  genome_build: mm10             # GRCm38; "toy" is for the synthetic CI dataset only
+  annotation: gencode_vM25
+  naming: ucsc                   # chromosome names look like chr1, chrX, chrM
+  main_chromosomes: [chr1, chr2, chr3, chr4, chr5, chr6, chr7, chr8, chr9, chr10,
+                     chr11, chr12, chr13, chr14, chr15, chr16, chr17, chr18, chr19,
+                     chrX, chrY]
+  mito_contig: chrM
+  files:
+    fasta: resources/genome/GRCm38.primary_assembly.genome.fa
+    gtf: resources/annotation/gencode.vM25.annotation.gtf
+    chrom_sizes: resources/genome/mm10.chrom.sizes
+    blacklist: resources/blacklist/mm10-blacklist.v2.bed.gz
+    ccres: resources/ccres/mm10_ccres.bed.gz
+    motifs: resources/motifs/jaspar_core_vertebrates.meme
+    bowtie2_index: resources/index/bowtie2/mm10
+  dev_subset:                    # development loops only (PRD section 6)
+    enabled: false
+    chromosome: chr19
+    downsample_reads: 3000000    # per sample
+
+compute:
+  threads_default: 4             # TC-002 machine audit sets the real value
+  ram_gb: null                   # filled from docs/machine_audit.md
+  rna_path: star                 # star | salmon; salmon when RAM < ~32 GB (ADR-001)
+  max_download_gb: 20            # ask before exceeding (AGENTS.md)
+  max_download_files: 50
+
+# ---------------------------------------------------------------------------
+# Reads, alignment, QC (PRD section 7; ADR-001, ADR-009)
+# ---------------------------------------------------------------------------
+trimming:
+  enabled: true
+  tool: fastp
+  detect_adapters: true
+  quality_trimming: false        # adapter trimming only
+  min_length: 20
+
+qc:
+  fastqc: true
+  multiqc: true
+  policy: flag_only              # flags never auto-exclude; log a human sign-off
+  flags:
+    tss_enrichment_min: 5        # ATAC
+    frip_min: 0.15               # ATAC and narrow marks
+    nrf_min: 0.8
+    pbc1_min: 0.8
+    bisulfite_conversion_min: 0.98
+  encode_ideal_for_context:      # looser flags above are deliberate (public data vary)
+    nrf: 0.9
+    pbc1: 0.9
+    pbc2: 3
+
+dna_alignment:                   # ATAC and ChIP
+  aligner: bowtie2
+  bowtie2:
+    preset: very-sensitive
+    max_fragment_length: 2000    # -X
+    extra_flags: ["--no-mixed", "--no-discordant"]
+  filters:
+    mapq_min: 30                 # primary analysis is unique-mapping (ADR-009)
+    proper_pairs_only: true
+    remove_contigs: [chrM]
+    blacklist: true              # ENCODE mm10 blacklist v2
+  duplicates:
+    tool: picard
+    remove: true
+  tn5_shift:
+    assays: [atac]
+    plus_strand: 4
+    minus_strand: -5
+  keep_multimapper_analysis: false   # repeat-class analysis is a stretch (ADR-009)
+
+peaks:
+  caller: macs3
+  qvalue: 0.01
+  narrow_targets: [atac, h3k27ac, h3k4me3, h3k9ac]
+  broad_targets: [h3k27me3, h3k9me3, h3k4me1, h3k36me3]   # ENCODE-style; review per dataset
+  single_end_atac:
+    nomodel: true
+    shift: -75
+    extsize: 150
+  consensus:
+    min_replicates: 2            # present in at least 2 replicates of a condition
+    merge_across_conditions: true
+
+tracks:
+  enabled: true
+  bamcoverage:
+    normalize_using: CPM
+    bin_size: 10
+  per_condition_mean: true
+  igv_session: true
+  bookmark_gene_sets: [iegs_v1]
+
+rna:
+  quantifier: featurecounts      # featurecounts | salmon (follows compute.rna_path)
+  strandedness: auto
+  gene_filter:                   # configuration choice, review per dataset
+    min_count: 10
+    min_samples: 2
+
+methylation:                     # ADR-005
+  aligner: bismark
+  context: cpg_only              # non-CpG methylation is a later stretch
+  label: mC_hmC                  # bisulfite cannot separate 5mC from 5hmC
+  min_coverage: 5                # per CpG per sample
+  dss:
+    smoothing: wgbs_only         # dense WGBS only
+  thresholds:
+    fdr: 0.05
+    min_abs_delta_pct: 10        # percentage points
+  element_level:
+    min_cpgs: 3
+  coverage_gate:
+    min_cpgs_per_enhancer: 3
+    min_fraction_enhancers_covered: null   # set in an ADR after the first dataset
+  medip_adapter: false           # optional, for A3 only
+
+# ---------------------------------------------------------------------------
+# Differential analysis, annotation, motifs (ADR-007, ADR-008)
+# ---------------------------------------------------------------------------
+differential:
+  deseq2:
+    design: "~ batch + condition"
+    lfc_shrink: apeglm
+    fdr: 0.05
+    min_abs_log2fc: 0.585        # 1.5-fold
+  csaw_sensitivity:
+    enabled: true
+    bin_size: 10000              # background bins for composition-robust normalization
+  flag_if_dar_count_ratio_above: 2
+
+annotation:
+  promoter:
+    upstream: 1000
+    downstream: 500
+  enhancer:
+    tier1_ccre_classes: [pELS, dELS]
+    tier2_marks:
+      require: [h3k27ac, h3k4me1]
+      exclude: [h3k4me3]
+    tier3_min_tss_distance: 2000
+  gene_link:
+    method: nearest_expressed_tss
+    window: 100000
+    expressed:
+      min_count: 10
+      min_samples: 2
+
+motifs:
+  engine: python               # python now; HOMER rules arrive with a later card
+  database: jaspar_core_vertebrates
+  python_engine:
+    consensus: {}                # NAME: IUPAC (toy override); empty means use meme + the TF lists below
+    meme: resources/motifs/jaspar_core_vertebrates.meme
+    min_rel_score: 0.9
+    ratio: 2                     # matched background elements per foreground element
+  targeted:
+    creb: [CREB1]
+    mef2: [MEF2A, MEF2B, MEF2C, MEF2D]
+    ap1: [FOS, FOSB, FOSL1, FOSL2, JUN, JUNB, JUND, ATF3, "FOS::JUN"]
+  extended: [NPAS4, SRF, EGR1]
+  homer:
+    size: 200
+    mask: true
+  background:
+    type: nondifferential_accessible
+    match_on: [gc, accessibility]
+    min_padj: 0.2                # elements with padj below this are excluded from the pool
+  multiple_testing: BH
+
+# ---------------------------------------------------------------------------
+# Integration and export (ADR-002, ADR-003, ADR-013)
+# ---------------------------------------------------------------------------
+integration:
+  permutations: 10000
+  background_match_on: [accessibility, gc, tss_distance]
+  meta_analysis: inverse_variance_random_effects
+  concordance: spearman
+  rrho2: true
+  lag_timepoints: true           # allow same and later time points (PRD section 8)
+
+bioagex_export:
+  enabled: true
+  schema_version: "0.1"
+  species_handling: undecided    # mouse_graphs | ortholog_to_human; OD6, after TC-003
+  output_dir: results/bioagex_export
+
+validation:                      # PRD section 11 (negative-control gate refined in PRD v1.1)
+  permutation_null:
+    max_splits: 20               # all distinct label splits when fewer exist (3 v 3: 9 besides the true one)
+    max_median_calls_fraction: 0.05   # of the true-label DAR count
+  unchanged_false_call_rate_max: 0.05    # simulations with known truth (toy dataset)
+  unchanged_median_log2fc_abs_max: 0.15  # normalization sanity on unchanged elements
+  coverage_gate_threshold: null  # set in an ADR
+  nfcore_overlap_threshold: null # set in an ADR
+
+contrasts: []                    # entries: {name, study_id, assay, treatment, control}
+
+# ---------------------------------------------------------------------------
+# Advanced track (PRD section 15). Everything stays off until the P2 gate passes.
+# ---------------------------------------------------------------------------
+advanced:
+  enabled: false
+  tfact:                         # X1
+    tool: chromvar
+    tfs: [CREB1, MEF2A, MEF2C, FOS, JUN, FOSL2, ATF3, NPAS4]
+    background_match_on: [gc, accessibility]
+  plasticity_index:              # X2
+    freeze_on: activity_data
+    adr: null                    # ADR number that freezes the definition
+  rejuvenation_transfer:         # X3
+    dataset: R1
+    accession: GSE276656
+  seqmodel:                      # X4
+    provider: alphagenome_api
+    api_key_env: ALPHAGENOME_API_KEY   # read from the environment; never commit a key
+    organism: mouse
+    cache_dir: results/seqmodel_cache
+    record_versions: true
+  graph:                         # X5
+    leave_one_study_out: true
+    baselines: [ridge, elasticnet]

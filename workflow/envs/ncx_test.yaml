@@ -1,0 +1,26 @@
+name: ncx-test
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - python=3.11
+  - numpy
+  - scipy
+  - pandas
+  - pydantic>=2
+  - pyyaml
+  - pytest
+  - snakemake>=8
+  - bowtie2
+  - samtools
+  - bedtools
+  - macs3
+  - deeptools
+  - fastp
+  - multiqc
+  - picard
+  - r-base
+  - bioconductor-deseq2
+  - bioconductor-apeglm
+  - r-optparse

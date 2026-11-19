@@ -1,0 +1,10 @@
+name: ncx-snakemake
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - python=3.11
+  - snakemake>=8
+  - pyyaml
+  - pydantic>=2

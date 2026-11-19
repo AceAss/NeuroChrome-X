@@ -1,0 +1,50 @@
+symbol	aliases	category	tier	source	curated_on	status	notes
+Fos	c-Fos	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Fosb	FosB	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Fosl2	Fra2|Fra-2	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Jun	c-Jun	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Junb	JunB	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Egr1	Zif268|Krox24|NGFI-A	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Egr2	Krox20	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Egr3		tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Egr4	NGFI-C	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Npas4	Nxf	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Nr4a1	Nur77	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Nr4a2	Nurr1	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Nr4a3	Nor1	tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Atf3		tf	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Arc	Arg3.1	effector	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Homer1	Homer1a|Vesl-1	effector	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	Homer1a is the activity-induced isoform
+Bdnf		neurotrophin	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	track promoters and exons separately; promoter IV is the classic activity-regulated one
+Btg2	Tis21|Pc3	regulator	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Ier2	Pip92	regulator	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Ier3	Iex-1	regulator	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Gadd45b		regulator	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Gadd45g		regulator	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Dusp1	Mkp1|Mkp-1	phosphatase	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Dusp6	Mkp3	phosphatase	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Sgk1		kinase	1	canonical rapid IEG; curator list, cross-check against Tyssowski 2018 and Hrvatin 2018 tables before freezing	2026-11-05	curated_v1	
+Jund	JunD	tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	variable induction; PRD seed moved from tier 1
+Fosl1	Fra1|Fra-1	tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Klf4		tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Klf6		tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Klf10	Tieg1	tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Maff		tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Cebpb	C/EBPbeta	tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Cebpd	C/EBPdelta	tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Nfil3	E4bp4	tf	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Ier5		regulator	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Ppp1r15a	Gadd34	regulator	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Zfp36	Ttp|Tristetraprolin	regulator	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Rgs2		regulator	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Rasd1	Dexras1	regulator	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Ifrd1	Pc4|Tis7	regulator	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Pim1		kinase	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Plk2	Snk	kinase	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Sik1		kinase	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Trib1		kinase	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	pseudokinase
+Dusp5		phosphatase	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	PRD seed moved from tier 1
+Inhba	Activin A	secreted	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Nptx2	Narp	secreted	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Pcsk1		secreted	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	
+Ccn1	Cyr61	secreted	2	reported activity-regulated gene; curator list, verify against published tables	2026-11-05	candidate_v1	symbol differs by annotation release; map through aliases

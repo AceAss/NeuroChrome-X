@@ -1,0 +1,63 @@
+# Override for the synthetic CI dataset built by tests/data/toy/make_toy.py (TC-004).
+# Use:  snakemake --configfile config/config.yaml config/overrides/toy.yaml
+# Everything not listed here keeps its value from config/config.yaml.
+
+paths:
+  samples: tests/data/toy/samples.tsv
+  results: results/toy
+  logs: results/toy/logs
+  tmp: results/toy/tmp
+
+reference:
+  genome_build: toy
+  annotation: toy_gtf
+  main_chromosomes: [chr19]
+  mito_contig: chrM
+  files:
+    fasta: tests/data/toy/generated/toy.fa
+    gtf: tests/data/toy/generated/toy.gtf
+    chrom_sizes: tests/data/toy/generated/toy.chrom.sizes
+    blacklist: tests/data/toy/generated/toy_blacklist.bed
+    ccres: tests/data/toy/generated/toy_ccres.bed
+    bowtie2_index: results/toy/index/bowtie2/toy
+
+compute:
+  threads_default: 2
+  rna_path: salmon               # irrelevant for the toy: RNA enters as counts
+
+qc:
+  fastqc: false
+  multiqc: false
+  flags:
+    tss_enrichment_min: 2        # synthetic reads are not TSS-enriched like real ATAC
+    frip_min: 0.3
+
+differential:
+  csaw_sensitivity:
+    bin_size: 5000               # the toy chr19 is only 3 Mb
+
+integration:
+  permutations: 1000             # fast CI; real runs use 10000
+
+contrasts:
+  - name: stim_vs_ctrl
+    study_id: toy
+    assay: atac
+    treatment: stimulated
+    control: control
+
+dna_alignment:
+  duplicates:
+    tool: samtools               # Picard is the real default; samtools keeps the toy test light
+
+differential:
+  deseq2:
+    lfc_shrink: none             # apeglm is in the conda environments; the toy gates use no shrinkage
+
+motifs:
+  engine: python
+  python_engine:
+    consensus:
+      AP1: TGAGTCA
+      CREB: TGACGTCA
+      MEF2: CTAAAAATAG

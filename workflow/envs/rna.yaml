@@ -1,0 +1,10 @@
+name: ncx-rna
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - star
+  - salmon
+  - subread
+  - samtools

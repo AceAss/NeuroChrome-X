@@ -1,0 +1,11 @@
+name: ncx-peaks
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - python=3.11
+  - macs3
+  - bedtools
+  - deeptools
+  - samtools

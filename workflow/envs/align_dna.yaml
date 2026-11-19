@@ -1,0 +1,11 @@
+name: ncx-align-dna
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - bowtie2
+  - samtools
+  - picard
+  - deeptools
+  - bedtools

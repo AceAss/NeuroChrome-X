@@ -1,0 +1,9 @@
+name: ncx-methyl
+channels:
+  - conda-forge
+  - bioconda
+  - nodefaults
+dependencies:
+  - bismark
+  - bowtie2
+  - samtools
